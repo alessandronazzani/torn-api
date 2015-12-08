@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Torn Faction API</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/angular-growl/build/angular-growl.min.css" rel="stylesheet">
+    <link href="/css/torn.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+      .growl {
+        bottom: 0px!important;
+        right:auto!important;
+        top: auto!important;
+        width:100%;
+        text-align: center;
+        font-size: 18px;
+      }
+      @-moz-document url-prefix() {
+        fieldset { display: table-cell; }
+      }
+    </style>
+  </head>
+  <body ng-app="tornapi">
+   <header role="navigation" data-region="header" ng-hide="hidetoolbar">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <a class="navbar-brand" href="#/basic" style="padding:0;">
+           <img style="padding:5px;" src="/img/logo.png" alt="" height="50px">
+        </a>
+        <div class="navbar-header">
+         <ul class="nav nav-tabs">
+           <li role="presentation" ng-class="{ active: active('/basic') }">
+              <a href="#/basic"><span class="glyphicon glyphicon-home"></span> Home</a>
+           </li>
+           <li role="presentation" ng-class="{ active: active('/currency') }">
+              <a href="#/currency"><span class="glyphicon glyphicon-piggy-bank"></span> Vault</a>
+           </li>
+           <li role="presentation" class="dropdown" ng-class="{ active: active('arm-') }">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                 <span class="glyphicon glyphicon-tent"></span> Armoury <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                 <li role="presentation" ng-class="{ active: active('/weapons') }">
+                    <a href="#/weapons">Weapons</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/armor') }">
+                    <a href="#/armor">Armor</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/temporary') }">
+                    <a href="#/temporary">Temp</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/medical') }">
+                    <a href="#/medical">Meds</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/drugs') }">
+                    <a href="#/drugs">Drugs</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/boosters') }">
+                    <a href="#/boosters">Boosters</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/cesium') }">
+                    <a href="#/cesium">Cesium</a>
+                 </li>
+              </ul>
+           </li>
+           <li role="presentation" class="dropdown" ng-class="{ active: activesub(['news']) }">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                 <span class="glyphicon glyphicon-th-list"></span> News <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                 <li role="presentation" ng-class="{ active: active('/mainnews') }">
+                    <a href="#/mainnews">News</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/mainnewsfull') }">
+                    <a href="#/mainnewsfull">News full</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/armorynews') }">
+                    <a href="#/armorynews">Armory</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/armorynewsfull') }">
+                    <a href="#/armorynewsfull">Armory full</a>
+                 </li>
+                 <li role="presentation" ng-class="{ active: active('/donationnewsfull') }">
+                    <a href="#/donationnewsfull">Donations full</a>
+                 </li>
+              </ul>
+           </li>
+           <li role="presentation" ng-class="{ active: active('/crimes') }">
+              <a href="#/crimes"><span class="glyphicon glyphicon-map-marker"></span> Crimes</a>
+           </li>
+           <li role="presentation" ng-class="{ active: active('/attacksfull') }">
+              <a href="#/attacksfull"><span class="glyphicon glyphicon-screenshot"></span> Attacks</a>
+           </li>
+           <li><a class="c-loader"><i class="fa fa-lg fa-refresh fa-spin"></i></a></li>
+         </ul>
+       </div>
+      </div>
+    </div>
+  </header>
+  <div style="top: 100px;z-index:10000;position: absolute;" growl></div>
+  <hr class="invisible">
+  <div class="container" ng-view></div>
+  <footer role="contentinfo" data-region="footer">
+    <div class="container"><p class="text-muted">&copy; Vulpes</p></div>
+  </footer>
+  <script src="/lib/underscore/underscore.js"></script>
+  <script src="/lib/jquery/dist/jquery.min.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/lib/angular/angular.js"></script>
+  <script src="/lib/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="/lib/angular-route/angular-route.js"></script>
+  <script src="/lib/angular-strap/dist/angular-strap.min.js"></script>
+  <script src="/lib/angular-strap/dist/angular-strap.tpl.min.js"></script>
+  <script src="/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="/lib/angular-growl/build/angular-growl.js"></script>
+  <script src="/lib/angular-utils-pagination/dirPagination.js"></script>
+  <script src="/js/ctrl/torn.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

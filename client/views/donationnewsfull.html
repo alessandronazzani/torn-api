@@ -1,0 +1,33 @@
+<div class="row">
+   <div class="col-md-11 vcenter">
+      <h1>Donation news</h1>
+   </div><!--
+   --><div class="col-md-1 vcenter">
+      <p class="pull-right"><a href="" title="Refresh data" ng-click="reload()">
+         <span class="glyphicon glyphicon-refresh btn-sm"></span>
+      </a></p>
+   </div>
+</div>
+<hr class="invisible" />
+<div class="content-main" data-region="content">
+   <div class="table-responsive">
+      <div class="input-group">
+         <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
+         <input type="text" ng-model="search.text" class="form-control" placeholder="Filter the list">
+      </div>
+      <hr />
+      <table class="table table-striped table-bordered table-condensed">
+         <tr>
+            <th class="text-right">Event ID</th>
+            <th><a href="" ng-click="predicate = 'value.timestamp'; reverse=!reverse">Date</a></th>
+            <th>Text</th>
+         </tr>
+         <tr dir-paginate="item in items.donationnews | orderBy:predicate:reverse | filter:search.text | itemsPerPage:itemsPerPage" current-page="currentPage">
+            <td class="text-right">{{item._id}}</td>
+            <td>{{item.timestamp * 1000 | utc | date:'dd-MMM-yyyy HH:mm:ss'}}</td>
+            <td ng-bind-html="item.news"></td>
+         </tr>
+      </table>
+      <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+   </div>
+</div>
