@@ -13,7 +13,7 @@
    <div class="table-responsive">
       <div class="input-group">
          <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
-         <input type="text" ng-model="search.text" class="form-control" placeholder="Filter the list">
+         <input type="text" ng-model="search.text" class="form-control" placeholder="Filter attacks">
       </div>
       <hr />
       <table class="table table-striped table-bordered table-condensed">
@@ -23,21 +23,26 @@
          <tr>
             <th class="text-right">Log ID</th>
             <th><a href="" ng-click="order('our_attacks', 'timestamp_started')">Date</a></th>
-            <th><a href="" ng-click="order('our_attacks', 'attacker_id')">Attacker</a></th>
+            <th><a href="" ng-click="order('our_attacks', 'attacker_name')">Our hero</a></th>
             <th><a href="" ng-click="order('our_attacks', 'defender_id')">Defender</a></th>
             <th><a href="" ng-click="order('our_attacks', 'result')">Result</a></th>
             <th><a href="" ng-click="order('our_attacks', 'respect_gain')">Respect gain</a></th>
          </tr>
-         <tr dir-paginate="item in items.our_attacks | orderBy:predicate:reverse | filter:search.text | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="a">
+         <tr dir-paginate="item in items.our_attacks | orderBy:predicate:reverse | filter:search.text | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="a" ng-class="{'text-danger': item.result==='Lose'}">
             <td class="text-right">{{item._id}}</td>
             <td>{{item.timestamp_started * 1000 | utc | date:'dd-MMM-yyyy HH:mm:ss'}}</td>
-            <td ng-bind-html="item.attacker_id"></td>
+            <td ng-bind-html="item.attacker_name"></td>
             <td ng-bind-html="item.defender_id"></td>
             <td ng-bind-html="item.result"></td>
             <td ng-bind-html="item.respect_gain"></td>
          </tr>
       </table>
       <dir-pagination-controls pagination-id="a" boundary-links="true"></dir-pagination-controls>
+      <hr />
+      <div class="input-group">
+         <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
+         <input type="text" ng-model="search.text2" class="form-control" placeholder="Filter defends">
+      </div>
       <hr />
       <table class="table table-striped table-bordered table-condensed">
          <tr>
@@ -46,17 +51,17 @@
          <tr>
             <th class="text-right">Log ID</th>
             <th><a href="" ng-click="order('defends', 'timestamp_started')">Date</a></th>
+            <th><a href="" ng-click="order('defends', 'defender_name')">Our victim</a></th>
             <th><a href="" ng-click="order('defends', 'attacker_id')">Attacker</a></th>
             <th><a href="" ng-click="order('defends', 'attacker_faction')">Attacker Faction</a></th>
-            <th><a href="" ng-click="order('defends', 'defender_id')">Defender</a></th>
             <th><a href="" ng-click="order('defends', 'result')">Result</a></th>
          </tr>
-         <tr dir-paginate="item in items.defends | orderBy:predicate:reverse | filter:search.text | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="d">
+         <tr dir-paginate="item in items.defends | orderBy:predicate:reverse | filter:search.text2 | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="d" ng-class="{'text-success': item.result==='Lose'}">
             <td class="text-right">{{item._id}}</td>
             <td>{{item.timestamp_started * 1000 | utc | date:'dd-MMM-yyyy HH:mm:ss'}}</td>
+            <td ng-bind-html="item.defender_name"></td>
             <td ng-bind-html="item.attacker_id"></td>
             <td ng-bind-html="item.attacker_faction"></td>
-            <td ng-bind-html="item.defender_id"></td>
             <td ng-bind-html="item.result"></td>
          </tr>
       </table>
