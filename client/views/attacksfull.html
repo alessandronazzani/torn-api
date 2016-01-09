@@ -13,28 +13,49 @@
    <div class="table-responsive">
       <div class="input-group">
          <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
+         <input type="text" ng-model="search.text3" class="form-control" placeholder="Filter HoF">
+      </div>
+      <hr />
+      <table class="table table-striped table-bordered table-condensed">
+         <tr>
+            <th class="text-center" colspan="2">Hall of Fame</th>
+         </tr>
+         <tr>
+            <th><a href="" ng-click="order('hof', 'attacker_name')">Our hero</a></th>
+            <th class="text-right"><a href="" ng-click="order('hof', 'respect_gain')">Total respect gained</a></th>
+         </tr>
+         <tr dir-paginate="item in items.hof | orderBy:predicate:reverse | filter:search.text3 | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="c">
+            <td>{{item.attacker_name}}</td>
+            <td class="text-right">{{item.respect_gain}}</td>
+         </tr>
+      </table>
+      <hr />
+      <div class="input-group">
+         <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
          <input type="text" ng-model="search.text" class="form-control" placeholder="Filter attacks">
       </div>
       <hr />
       <table class="table table-striped table-bordered table-condensed">
          <tr>
-            <th class="text-center" colspan="6">Our attacks</th>
+            <th class="text-center" colspan="7">Our attacks</th>
          </tr>
          <tr>
             <th class="text-right">Log ID</th>
             <th><a href="" ng-click="order('our_attacks', 'timestamp_started')">Date</a></th>
             <th><a href="" ng-click="order('our_attacks', 'attacker_name')">Our hero</a></th>
-            <th><a href="" ng-click="order('our_attacks', 'defender_id')">Defender</a></th>
+            <th class="text-right"><a href="" ng-click="order('our_attacks', 'defender_id')">Defender</a></th>
+            <th class="text-right"><a href="" ng-click="order('our_attacks', 'defender_faction')">Defender Faction</a></th>
             <th><a href="" ng-click="order('our_attacks', 'result')">Result</a></th>
-            <th><a href="" ng-click="order('our_attacks', 'respect_gain')">Respect gain</a></th>
+            <th class="text-right"><a href="" ng-click="order('our_attacks', 'respect_gain')">Respect gain</a></th>
          </tr>
          <tr dir-paginate="item in items.our_attacks | orderBy:predicate:reverse | filter:search.text | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="a" ng-class="{'text-danger': item.result==='Lose'}">
             <td class="text-right">{{item._id}}</td>
             <td>{{item.timestamp_started * 1000 | utc | date:'dd-MMM-yyyy HH:mm:ss'}}</td>
-            <td ng-bind-html="item.attacker_name"></td>
-            <td ng-bind-html="item.defender_id"></td>
-            <td ng-bind-html="item.result"></td>
-            <td ng-bind-html="item.respect_gain"></td>
+            <td>{{item.attacker_name}}</td>
+            <td class="text-right">{{item.defender_id}}</td>
+            <td class="text-right">{{item.defender_faction}}</td>
+            <td>{{item.result}}</td>
+            <td class="text-right"><span ng-show="item.respect_gain">{{item.respect_gain}}</span></td>
          </tr>
       </table>
       <dir-pagination-controls pagination-id="a" boundary-links="true"></dir-pagination-controls>
@@ -59,10 +80,10 @@
          <tr dir-paginate="item in items.defends | orderBy:predicate:reverse | filter:search.text2 | itemsPerPage:itemsPerPage" current-page="currentPage" pagination-id="d" ng-class="{'text-success': item.result==='Lose'}">
             <td class="text-right">{{item._id}}</td>
             <td>{{item.timestamp_started * 1000 | utc | date:'dd-MMM-yyyy HH:mm:ss'}}</td>
-            <td ng-bind-html="item.defender_name"></td>
-            <td ng-bind-html="item.attacker_id"></td>
-            <td ng-bind-html="item.attacker_faction"></td>
-            <td ng-bind-html="item.result"></td>
+            <td>{{item.defender_name}}</td>
+            <td>{{item.attacker_id}}</td>
+            <td>{{item.attacker_faction}}</td>
+            <td>{{item.result}}</td>
          </tr>
       </table>
       <dir-pagination-controls pagination-id="d" boundary-links="true"></dir-pagination-controls>
